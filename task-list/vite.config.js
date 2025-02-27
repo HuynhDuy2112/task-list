@@ -7,6 +7,7 @@ import svgr from 'vite-plugin-svgr'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), eslintPlugin(), svgr()],
+  base: '/task-list/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
