@@ -55,6 +55,7 @@ function DropdownFilter(props) {
       key: 5,
       name: 'nameUser',
       show: true,
+      value: 'Người thực hiện',
     },
   ])
   const [, forceRender] = useState(0)
