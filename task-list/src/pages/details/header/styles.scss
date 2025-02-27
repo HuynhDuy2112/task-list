@@ -1,0 +1,104 @@
+.custom-menu {
+  padding: 20px !important;
+  width: 260px;
+  border-radius: 10px;
+
+  .custom-cursor {
+    cursor: default !important;
+  }
+
+  li {
+    padding: 0 !important;
+  }
+
+  .ant-divider {
+    flex-shrink: 0;
+    border-top: 0px solid rgba(0, 0, 0, .12);
+    border-right: 0px solid rgba(0, 0, 0, .12);
+    border-left: 0px solid rgba(0, 0, 0, .12);
+    background-color: transparent;
+    height: .0625rem;
+    margin: 1rem 0px;
+    border-bottom: none;
+    opacity: .25;
+    background-image: linear-gradient(to right, rgba(52, 71, 103, 0), rgba(52, 71, 103, .5), rgba(52, 71, 103, 0)) !important;
+  }
+
+  .info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    width: 100%;
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--title);
+    }
+
+    .position {
+      background-image: linear-gradient(310deg, rgb(33, 82, 255), rgb(33, 212, 253));
+      text-transform: uppercase;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 12px;
+      font-weight: 550;
+    }
+
+    .email {
+      background-image: linear-gradient(310deg, rgb(98, 117, 148), rgb(168, 184, 216));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+
+  .button {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+    background: var(--background);
+
+    .edit-avatar {
+      color: #606368;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      border-radius: 8px;
+      padding: 8px 20px;
+      // background: var(--background);
+
+      .icon path {
+        fill: #606368;
+      }
+
+      &:hover .icon path {
+        fill: rgba(0, 0, 0, 0.88);
+      }
+    }
+
+    .log-out {
+      color: #fb5264;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      border-radius: 8px;
+      padding: 8px 20px;
+      // background: var(--background);
+
+      &:hover {
+        color: #fb5264;
+      }
+    }
+  }
+}
