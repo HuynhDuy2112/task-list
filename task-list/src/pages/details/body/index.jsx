@@ -2,17 +2,19 @@ import React, { useState, useEffect, useRef } from 'react'
 import dayjs from 'dayjs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter } from '@fortawesome/free-solid-svg-icons'
-import { Button, Dropdown } from 'antd'
+import { Button, Dropdown, Modal } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 
 import ModalRow from './layouts/modal.jsx'
 import Table from './layouts/table.jsx'
 import DropdownFilter from './layouts/dropdown-filter.jsx'
 import Search from '../../../components/search'
+import AddField from './layouts/modal-add-field.jsx'
 import './styles.scss'
 
 function Body() {
-  const [api, setApi] = useState([])
+  const [apiData, setApiData] = useState([])
+  const [apiLabel, setApiLabel] = useState([])
   const [openDropdown, setOpenDropdown] = useState(false)
   const [openRow, setOpenRow] = useState(false)
   const [data, setData] = useState()
@@ -47,27 +49,36 @@ function Body() {
   ])
   const isFiltered = useRef([])
 
-  const dataSource = api.map((data, i) => ({
-    key: i + 1,
-    name: data.name,
-    room: data.room,
-    group: data.group,
-    startDate: dayjs(data.startDate).isValid() && dayjs(data.startDate).format('DD/MM/YYYY'),
-    deadline: dayjs(data.deadline).isValid() && dayjs(data.deadline).format('DD/MM/YYYY'),
-    state: data.state,
-    status: data.status,
-    nameUser: data.nameUser,
-  }))
+  const fetchData = () => {
+    const link = 'http://192.168.1.66:2222/'
 
-  const fechData = () => {
-    fetch('http://localhost:2222/task')
+    fetch(`${link}task`)
       .then((res) => res.json())
-      .then((result) => setApi(result))
+      .then((result) => {
+        const formattedData = result.map((item) => ({
+          ...item,
+          startDate: dayjs(item.startDate).isValid() && dayjs(item.startDate).format('DD/MM/YYYY'),
+          deadline: dayjs(item.deadline).isValid() && dayjs(item.deadline).format('DD/MM/YYYY'),
+        }))
+        setApiData(formattedData)
+      })
+      .catch((err) => console.error(err))
+
+    fetch(`${link}label`)
+      .then((res) => res.json())
+      .then((result) => {
+        const formattedLabel = result.map((item) => {
+          const newItem = { ...item }
+          Object.keys(newItem).forEach((key) => (newItem[key] = newItem[key].toUpperCase()))
+          return newItem
+        })
+        setApiLabel(formattedLabel)
+      })
       .catch((err) => console.error(err))
   }
 
   useEffect(() => {
-    fechData()
+    fetchData()
   }, [])
 
   const onSearch = (e) => {
@@ -91,23 +102,23 @@ function Body() {
       isFiltered.current.forEach((i) => (newChecked[i] = true))
       return newChecked
     })
-    setOpenDropdown(!openDropdown)
+    setOpenDropdown(true)
   }
+
+  const addFieldRef = useRef()
 
   return (
     <div className="body-layout">
       <div>
         <Dropdown
           open={openDropdown}
-          onOpenChange={(visible) => setOpenDropdown(visible)}
           onClick={handleOpenDropdown}
           placement="bottomLeft"
           arrow
           trigger={['click']}
           dropdownRender={() => (
             <DropdownFilter
-              api={api}
-              dataSource={dataSource}
+              apiData={apiData}
               filterForm={filterForm}
               setFilterForm={setFilterForm}
               checked={checked}
@@ -122,15 +133,15 @@ function Body() {
           </Button>
         </Dropdown>
         <Search onSearch={onSearch} prefix={prefix} />
-        <Button onClick={fechData}>Reset</Button>
-        <Button>+ Tạo mới</Button>
+        <Button onClick={fetchData}>Reset</Button>
+        <Button onClick={() => addFieldRef.current?.showModal()}>+ Tạo mới</Button>
+        <AddField ref={addFieldRef} apiData={apiData} />
       </div>
       <Table
-        api={api}
+        apiData={apiData}
         searchValue={searchValue}
         setData={setData}
         setOpenRow={setOpenRow}
-        dataSource={dataSource}
         filterForm={filterForm}
       />
       <ModalRow openRow={openRow} setOpenRow={setOpenRow} data={data} />

@@ -1,4 +1,16 @@
 {
+  "label": [
+    {
+      "name": "tên công việc",
+      "room": "phòng ban",
+      "group": "dự án nhóm",
+      "startDate": "ngày bắt đầu",
+      "deadline": "hạn hoàn thành",
+      "state": "trạng thái",
+      "status": "tình trạng",
+      "nameUser": "người thực hiện"
+    }
+  ],
   "task": [
     {
       "start": 0,

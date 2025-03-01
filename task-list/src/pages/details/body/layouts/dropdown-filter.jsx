@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Checkbox, Select, DatePicker, Badge, Input } from 'antd'
+import { Checkbox, Select, DatePicker, Badge, Input, Modal } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import dayjs from 'dayjs'
@@ -9,16 +9,8 @@ dayjs.extend(isBetween)
 const { RangePicker } = DatePicker
 
 function DropdownFilter(props) {
-  const {
-    api,
-    dataSource,
-    filterForm,
-    setFilterForm,
-    checked,
-    setChecked,
-    setOpenDropdown,
-    filterValues,
-  } = props
+  const { apiData, filterForm, setFilterForm, checked, setChecked, setOpenDropdown, filterValues } =
+    props
 
   const [label, setLabel] = useState([
     {
@@ -58,9 +50,10 @@ function DropdownFilter(props) {
       value: 'Người thực hiện',
     },
   ])
-  const [, forceRender] = useState(0)
+  const [, forceRender] = useState(true)
+  const [isCloseDropdown, setIsCloseDropdown] = useState(false)
 
-  const formattedNameUser = [...new Set(api.map((item) => item.nameUser.toLowerCase()))].map(
+  const formattedNameUser = [...new Set(apiData.map((item) => item.nameUser.toLowerCase()))].map(
     (str) => {
       return str
         .split(' ')
@@ -71,15 +64,13 @@ function DropdownFilter(props) {
 
   const handleFilterChange = (key, value) => {
     filterValues.current[key].value = value
-    forceRender((prev) => prev + 1) //update fake state
+    forceRender((prev) => !prev) //update fake state
   }
 
   const handleCheckboxChange = (index) => {
     setChecked((prev) => {
       const updateChecked = [...prev]
-
       updateChecked[index] = !updateChecked[index]
-      console.log(updateChecked)
       return updateChecked
     })
   }
@@ -87,7 +78,7 @@ function DropdownFilter(props) {
   const select = (i, name) => {
     return i === 5
       ? formattedNameUser.map((value) => ({ value: value, label: value }))
-      : getUniqueFormattedList(api, name).map((value) => ({
+      : getUniqueFormattedList(apiData, name).map((value) => ({
           value: value,
           label: value,
         }))
@@ -123,7 +114,7 @@ function DropdownFilter(props) {
 
     const normalize = (val) => val?.toLowerCase()
 
-    const filter = api
+    const filter = apiData
       .filter(
         ({ room, group, startDate, state, status, nameUser }) =>
           (roomFilter.value === null || normalize(room) === normalize(roomFilter.value)) &&
@@ -158,17 +149,40 @@ function DropdownFilter(props) {
   }
 
   const countItems = () => {
-    return filterForm?.length ? filterForm?.length : dataSource?.length
+    return filterForm?.length ? filterForm?.length : apiData?.length
   }
-  console.log(filterForm)
+
+  useEffect(() => {
+    checked.forEach((item, i) => {
+      if (!item) {
+        filterValues.current[i].value = null
+        forceRender((prev) => !prev)
+      }
+    })
+  }, [checked])
+
+  const closeDropdown = () => {
+    setIsCloseDropdown(!isCloseDropdown)
+    cancelFilter()
+  }
 
   return (
     <div style={{ padding: 10, background: 'white', borderRadius: 4 }}>
       <form style={{ width: '315px' }}>
-        <div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span>Lọc danh sách</span>
-          <FontAwesomeIcon icon={faXmark} />
+          <FontAwesomeIcon onClick={() => setIsCloseDropdown(!isCloseDropdown)} icon={faXmark} />
         </div>
+        <Modal
+          open={isCloseDropdown}
+          title="Bạn có chắc muốn đóng bộ lọc không?"
+          onOk={closeDropdown}
+          onCancel={() => setIsCloseDropdown(!isCloseDropdown)}
+          okText="Đồng ý"
+          cancelText="Hủy"
+        >
+          Nếu đóng thì bộ lọc sẽ bị tắt. Bạn muốn duy trì bộ lọc vui lòng ấn "Áp dụng"
+        </Modal>
         <div>
           <Input allowClear={true} placeholder="Tìm kiếm" onChange={onChangeSearchFilter} />
         </div>

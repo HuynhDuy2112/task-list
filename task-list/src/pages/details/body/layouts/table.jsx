@@ -100,7 +100,7 @@ const columns = [
   },
 ]
 
-function TableLayout({ searchValue, setData, setOpenRow, dataSource, filterForm }) {
+function TableLayout({ searchValue, setData, setOpenRow, apiData, filterForm }) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
   const handleRowClick = (record) => {
@@ -111,18 +111,17 @@ function TableLayout({ searchValue, setData, setOpenRow, dataSource, filterForm 
   const filterFormNotUndefined = () => {
     return filterForm?.length
       ? filterForm?.filter((item) => item.name.toLowerCase().includes(searchValue.toLowerCase()))
-      : dataSource.filter((item) => item.name.toLowerCase().includes(searchValue.toLowerCase()))
+      : apiData.filter((item) => item.name.toLowerCase().includes(searchValue.toLowerCase()))
   }
 
   const filteredData = () => {
     return filterForm === undefined ? null : filterFormNotUndefined()
-    // console.log(filterForm === undefined ? null : filterFormNotUndefined())
   }
 
   const onSelectChange = (newSelectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', newSelectedRowKeys)
     setSelectedRowKeys(newSelectedRowKeys)
   }
+
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
