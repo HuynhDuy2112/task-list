@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Table } from 'antd'
+import React, { useState, useRef } from 'react'
+import { Modal, Table } from 'antd'
+import ModalRow from './modal.jsx'
 
-const columns = [
+/* const columns = [
   {
     title: '',
     dataIndex: 'key',
@@ -98,25 +99,34 @@ const columns = [
     title: 'NGƯỜI THỰC HIỆN',
     dataIndex: 'nameUser',
   },
-]
+] */
 
-function TableLayout({ searchValue, setData, setOpenRow, apiData, filterForm }) {
+function TableLayout({ searchValue, api, filterForm }) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
+  const [openRow, setOpenRow] = useState(false)
+  const rowValue = useRef(null)
+
+  const columns = Object.entries(api.label || {}).map(([key, label]) => ({
+    title: label,
+    dataIndex: key,
+    render: (_, record) =>
+      key === 'owner' ? [/* record.owner.avatarUrl, */ record.owner?.label] : record[key],
+  }))
 
   const handleRowClick = (record) => {
-    setData(record)
+    rowValue.current = record
     setOpenRow(true)
   }
 
-  const filterFormNotUndefined = () => {
+  /* const filterFormNotUndefined = () => {
     return filterForm?.length
       ? filterForm?.filter((item) => item.name.toLowerCase().includes(searchValue.toLowerCase()))
       : apiData.filter((item) => item.name.toLowerCase().includes(searchValue.toLowerCase()))
-  }
+  } */
 
-  const filteredData = () => {
+  /* const filteredData = () => {
     return filterForm === undefined ? null : filterFormNotUndefined()
-  }
+  } */
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys)
@@ -161,14 +171,18 @@ function TableLayout({ searchValue, setData, setOpenRow, apiData, filterForm }) 
   }
 
   return (
-    <Table
-      rowSelection={rowSelection}
-      columns={columns}
-      dataSource={filteredData()}
-      onRow={(record) => ({
-        onClick: () => handleRowClick(record),
-      })}
-    />
+    <>
+      <Table
+        rowSelection={rowSelection}
+        columns={columns}
+        // dataSource={filteredData()}
+        dataSource={api.task}
+        onRow={(record) => ({
+          onClick: () => handleRowClick(record),
+        })}
+      />
+      {openRow && <ModalRow openRow={openRow} setOpenRow={setOpenRow} record={rowValue.current} />}
+    </>
   )
 }
 

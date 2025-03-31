@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Modal } from 'antd'
 
-function ModalRow({ openRow, setOpenRow, data }) {
+function ModalRow({ openRow, setOpenRow, record }) {
+  console.log(record.owner)
+
   return (
-    <>
-      <Modal title={<p>Loading Modal</p>} open={openRow} onCancel={() => setOpenRow(false)}>
-        {data && Object.keys(data).map((key) => <p>{data[key]}</p>)}
-      </Modal>
-    </>
+    <Modal title={<p>{record?.name}</p>} open={openRow} onCancel={() => setOpenRow(false)}>
+      {record &&
+        Object.keys(record).map((key, i) => {
+          return (
+            <p key={i}>
+              {key === 'owner'
+                ? Object.keys(record[key]).map((item) => record[key][item].toString() + '---')
+                : record[key].toString()}
+            </p>
+          )
+        })}
+    </Modal>
   )
 }
 

@@ -5,7 +5,6 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons'
 import { Button, Dropdown, Modal } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 
-import ModalRow from './layouts/modal.jsx'
 import Table from './layouts/table.jsx'
 import DropdownFilter from './layouts/dropdown-filter.jsx'
 import Search from '../../../components/search'
@@ -13,11 +12,8 @@ import AddField from './layouts/modal-add-field.jsx'
 import './styles.scss'
 
 function Body() {
-  const [apiData, setApiData] = useState([])
-  const [apiLabel, setApiLabel] = useState([])
+  const [api, setApi] = useState([])
   const [openDropdown, setOpenDropdown] = useState(false)
-  const [openRow, setOpenRow] = useState(false)
-  const [data, setData] = useState()
   const [searchValue, setSearchValue] = useState('')
   const [checked, setChecked] = useState([false, false, false, false, false, false])
   const [filterForm, setFilterForm] = useState([])
@@ -50,29 +46,21 @@ function Body() {
   const isFiltered = useRef([])
 
   const fetchData = () => {
-    const link = 'http://192.168.1.66:2222/'
-
-    fetch(`${link}task`)
+    fetch(`http://192.168.1.35:2222/task-list`)
       .then((res) => res.json())
       .then((result) => {
-        const formattedData = result.map((item) => ({
-          ...item,
-          startDate: dayjs(item.startDate).isValid() && dayjs(item.startDate).format('DD/MM/YYYY'),
-          deadline: dayjs(item.deadline).isValid() && dayjs(item.deadline).format('DD/MM/YYYY'),
-        }))
-        setApiData(formattedData)
-      })
-      .catch((err) => console.error(err))
-
-    fetch(`${link}label`)
-      .then((res) => res.json())
-      .then((result) => {
-        const formattedLabel = result.map((item) => {
-          const newItem = { ...item }
-          Object.keys(newItem).forEach((key) => (newItem[key] = newItem[key].toUpperCase()))
-          return newItem
-        })
-        setApiLabel(formattedLabel)
+        const formatted = {
+          label: Object.fromEntries(
+            Object.entries(result.label).map(([key, value]) => [key, String(value).toUpperCase()])
+          ),
+          task: result.task.map((item) => ({
+            ...item,
+            startDate:
+              dayjs(item.startDate).isValid() && dayjs(item.startDate).format('DD/MM/YYYY'),
+            deadline: dayjs(item.deadline).isValid() && dayjs(item.deadline).format('DD/MM/YYYY'),
+          })),
+        }
+        setApi(formatted)
       })
       .catch((err) => console.error(err))
   }
@@ -118,7 +106,7 @@ function Body() {
           trigger={['click']}
           dropdownRender={() => (
             <DropdownFilter
-              apiData={apiData}
+              api={api}
               filterForm={filterForm}
               setFilterForm={setFilterForm}
               checked={checked}
@@ -135,16 +123,9 @@ function Body() {
         <Search onSearch={onSearch} prefix={prefix} />
         <Button onClick={fetchData}>Reset</Button>
         <Button onClick={() => addFieldRef.current?.showModal()}>+ Tạo mới</Button>
-        <AddField ref={addFieldRef} apiData={apiData} />
+        <AddField ref={addFieldRef} api={api} />
       </div>
-      <Table
-        apiData={apiData}
-        searchValue={searchValue}
-        setData={setData}
-        setOpenRow={setOpenRow}
-        filterForm={filterForm}
-      />
-      <ModalRow openRow={openRow} setOpenRow={setOpenRow} data={data} />
+      <Table api={api} searchValue={searchValue} filterForm={filterForm} />
     </div>
   )
 }

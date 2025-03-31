@@ -9,7 +9,7 @@ dayjs.extend(isBetween)
 const { RangePicker } = DatePicker
 
 function DropdownFilter(props) {
-  const { apiData, filterForm, setFilterForm, checked, setChecked, setOpenDropdown, filterValues } =
+  const { api, filterForm, setFilterForm, checked, setChecked, setOpenDropdown, filterValues } =
     props
 
   const [label, setLabel] = useState([
@@ -53,7 +53,7 @@ function DropdownFilter(props) {
   const [, forceRender] = useState(true)
   const [isCloseDropdown, setIsCloseDropdown] = useState(false)
 
-  const formattedNameUser = [...new Set(apiData.map((item) => item.nameUser.toLowerCase()))].map(
+  const formattedNameUser = [...new Set(api.map((item) => item.nameUser.toLowerCase()))].map(
     (str) => {
       return str
         .split(' ')
@@ -78,7 +78,7 @@ function DropdownFilter(props) {
   const select = (i, name) => {
     return i === 5
       ? formattedNameUser.map((value) => ({ value: value, label: value }))
-      : getUniqueFormattedList(apiData, name).map((value) => ({
+      : getUniqueFormattedList(api, name).map((value) => ({
           value: value,
           label: value,
         }))
@@ -114,7 +114,7 @@ function DropdownFilter(props) {
 
     const normalize = (val) => val?.toLowerCase()
 
-    const filter = apiData
+    const filter = api
       .filter(
         ({ room, group, startDate, state, status, nameUser }) =>
           (roomFilter.value === null || normalize(room) === normalize(roomFilter.value)) &&
@@ -149,7 +149,7 @@ function DropdownFilter(props) {
   }
 
   const countItems = () => {
-    return filterForm?.length ? filterForm?.length : apiData?.length
+    return filterForm?.length ? filterForm?.length : api?.length
   }
 
   useEffect(() => {

@@ -1,19 +1,29 @@
 {
-  "label": [
+  "task-list": {
+    "field": [
+      {
+        "columnName": "name",
+        "columnLabel": "Tên Công Việc"
+      },
+      {
+        "columnName": "room",
+        "columnLabel": "PHÒNG BAN"
+      },
+      {
+        "columnName": "group",
+        "columnLabel": "DỰ ÁN NHÓM"
+      },
+      {
+        "columnName": "state",
+        "columnLabel": "TRẠNG THÁI"
+      }
+    ]
+  },
+
+  "record-task": [
     {
-      "name": "tên công việc",
-      "room": "phòng ban",
-      "group": "dự án nhóm",
-      "startDate": "ngày bắt đầu",
-      "deadline": "hạn hoàn thành",
-      "state": "trạng thái",
-      "status": "tình trạng",
-      "nameUser": "người thực hiện"
-    }
-  ],
-  "task": [
-    {
-      "start": 0,
+      "id": "task-1",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo cáo tiến độ công việc",
       "room": "Phòng IT",
@@ -22,11 +32,18 @@
       "deadline": "2025-06-15",
       "state": "Đã hoàn thành",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Huỳnh Duy"
+      "owner": {
+        "isAdmin": true,
+        "label": "Huỳnh Duy",
+        "type": "user",
+        "roleName": "NHÂN VIÊN IT",
+        "roleId": "D21",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-2",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo cáo khách hàng",
       "room": "Phòng kinh doanh",
@@ -35,11 +52,18 @@
       "deadline": "2025-07-05",
       "state": "Đã hoàn thành",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Minh Cảnh"
+      "owner": {
+        "isAdmin": false,
+        "label": "Minh Cảnh",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D15",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-3",
+      "isStar": false,
       "avatar": "picture",
       "name": "Công bố bản thiết kế cho khách hàng",
       "room": "Phòng thiết kế",
@@ -48,11 +72,18 @@
       "deadline": "2025-08-28",
       "state": "Đã hoàn thành",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Thanh Phong"
+      "owner": {
+        "isAdmin": false,
+        "label": "Thanh Phong",
+        "type": "user",
+        "roleName": "NHÂN VIÊN THIẾT KẾ",
+        "roleId": "D18",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-4",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -61,11 +92,18 @@
       "deadline": "2025-09-28",
       "state": "Đã hoàn thành",
       "status": "Hoàn thành không đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-5",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá vật tư ngũ kim",
       "room": "Cá nhân",
@@ -74,11 +112,18 @@
       "deadline": "2025-05-28",
       "state": "Đã hoàn thành",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Tuyết Trinh"
+      "owner": {
+        "isAdmin": false,
+        "label": "Tuyết Trinh",
+        "type": "user",
+        "roleName": "TRỢ LÍ KINH DOANH",
+        "roleId": "D20",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-6",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -87,11 +132,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-7",
+      "isStar": false,
       "avatar": "picture",
       "name": "Video top 1 trending",
       "room": "Phòng marketing",
@@ -100,11 +152,18 @@
       "deadline": "2025-10-24",
       "state": "Không hoàn thành",
       "status": "Thất bại",
-      "avatarUser": "picture",
-      "nameUser": "Quyết Chiến"
+      "owner": {
+        "isAdmin": false,
+        "label": "Quyết Chiến",
+        "type": "user",
+        "roleName": "NHÂN VIÊN EDITOR",
+        "roleId": "D22",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-8",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -113,11 +172,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-9",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -126,11 +192,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-10",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -139,24 +212,38 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-11",
+      "isStar": false,
       "avatar": "picture",
       "name": "Hoàn thành web",
-      "room": "phòng it",
+      "room": "Phòng IT",
       "group": "Công việc cá nhân",
       "startDate": "2025-08-20",
       "deadline": "2025-10-05",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Huỳnh Duy"
+      "owner": {
+        "isAdmin": true,
+        "label": "Huỳnh Duy",
+        "type": "user",
+        "roleName": "NHÂN VIÊN IT",
+        "roleId": "D21",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-12",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -165,11 +252,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-13",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -178,11 +272,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-14",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -191,11 +292,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-15",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -204,11 +312,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-16",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -217,11 +332,18 @@
       "deadline": "2025-08-27",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-17",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -230,11 +352,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-18",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -243,11 +372,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-19",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -256,11 +392,18 @@
       "deadline": "2025-08-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Công Du"
+      "owner": {
+        "isAdmin": false,
+        "label": "Công Du",
+        "type": "user",
+        "roleName": "NHÂN VIÊN KINH DOANH",
+        "roleId": "D16",
+        "avatarUrl": "picture"
+      }
     },
     {
-      "start": 0,
+      "id": "task-20",
+      "isStar": false,
       "avatar": "picture",
       "name": "Báo giá khách hàng",
       "room": "Cá nhân",
@@ -269,8 +412,14 @@
       "deadline": "2025-02-28",
       "state": "Đang hoạt động",
       "status": "Đã xong đúng hạn",
-      "avatarUser": "picture",
-      "nameUser": "Huỳnh Duy"
+      "owner": {
+        "isAdmin": true,
+        "label": "Huỳnh Duy",
+        "type": "user",
+        "roleName": "NHÂN VIÊN IT",
+        "roleId": "D21",
+        "avatarUrl": "picture"
+      }
     }
   ]
 }

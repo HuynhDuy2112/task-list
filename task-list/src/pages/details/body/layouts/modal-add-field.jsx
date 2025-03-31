@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react'
 import { Modal, DatePicker, Form, Input, Select } from 'antd'
 const { RangePicker } = DatePicker
 
-const AddField = forwardRef(({ apiData }, ref) => {
+const AddField = forwardRef(({ api }, ref) => {
   const [open, setOpen] = useState(false)
   const [form] = Form.useForm()
 
@@ -13,8 +13,6 @@ const AddField = forwardRef(({ apiData }, ref) => {
     },
     hideModal: () => setOpen((prev) => !prev),
   }))
-
-  console.log(apiData)
 
   return (
     <Modal
